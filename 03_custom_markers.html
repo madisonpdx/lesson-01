@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<style>
+	  body, html { width: 100%; height: 100%; margin: 0; padding: 0; }
+	  #map_canvas {
+	    width: 100%;
+	    height: 100%;
+	    background-color: #CCC;
+	  }
+	</style>
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  </head>
+  <body>
+    <div id="map_canvas"></div>
+    <script>
+	  function initialize() {
+	  	// find the HTML element where we want to display the map.
+	  	var mapCanvas = document.getElementById('map_canvas');
+
+	  	// enter map options which center and zoom the map on Madison.
+    	var mapOptions = {
+	      center: new google.maps.LatLng(45.541800, -122.580821),
+	      zoom: 16,
+	      mapTypeId: google.maps.MapTypeId.ROADMAP
+	    }
+
+	    // create a new map and add it to the page.
+	    var map = new google.maps.Map(mapCanvas, mapOptions);
+
+	    // configure icons to use for marking different things on the map.
+	    var markerConfigs = {
+		  madison: {
+		  	title: 'Madison High School',
+		    icon: 'img/madison-icon.png',
+		    position: new google.maps.LatLng(45.541800, -122.580821)
+		  },
+		  subway: {
+		  	title: 'Subway',
+		    icon: 'img/food-icon.png',
+		    position: new google.maps.LatLng(45.544704,-122.579035)
+		  },
+		  phoOregon: {
+		  	title: 'Pho Oregon Restaurant',
+		    icon: 'img/food-icon.png',
+		    position: new google.maps.LatLng(45.540616,-122.578627)
+		  },
+		  tacoBell: {
+		  	title: 'Taco Bell',
+		    icon: 'img/food-icon.png',
+		    position: new google.maps.LatLng(45.53879,-122.57926)
+		  }		  
+		};
+
+		placeMarker(markerConfigs.madison, map);
+		placeMarker(markerConfigs.subway, map);
+		placeMarker(markerConfigs.phoOregon, map);
+		placeMarker(markerConfigs.tacoBell, map);
+	  }
+
+	  function placeMarker(markerConfig, map) {
+	  	var marker = new google.maps.Marker({
+			title: markerConfig.title,
+			icon: markerConfig.icon,
+			position: markerConfig.position,
+			map: map
+		});
+	  }
+
+	  // call the initialize function as soon as the page is loaded.
+	  google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+  </body>
+</html>
